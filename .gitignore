@@ -1,4 +1,4 @@
-./node_modules
-./frontend-react/node_modules
-./dist
-./build
+node_modules
+dist
+build
+frontend-react/node_modules/
