@@ -16,6 +16,12 @@
 - [ ] Navegador com DevTools preparado
 - [ ] jwt.io em aba separada
 
+### Material para Dinâmicas
+- [ ] Timer/cronômetro visível para todos
+- [ ] Tokens JWT prontos para decodificar
+- [ ] Lousa/slides para ranking
+- [ ] `DINAMICAS_E_QUIZES.md` impresso/aberto
+
 ---
 
 ## ⏰ **ROTEIRO HORA A HORA**
@@ -31,7 +37,15 @@
 
 **🎬 Frase de abertura:** *"Em 3 horas vocês vão do zero a um sistema completo funcionando!"*
 
-#### ✅ **15:00-40: API Simples + Postman**
+#### ✅ **15:00-30: 🎯 DINÂMICA - Quiz REST + URLs**
+- [ ] **Quiz:** Placas verde/vermelha "REST ou não REST?" (5min)
+- [ ] **Exercício:** Grupos criam URLs para Blog Posts (10min)
+- [ ] **Circular:** Ajudar grupos com dúvidas
+- [ ] **Apresentação:** Cada grupo mostra suas URLs
+
+**🎯 Objetivo:** *"Fixar conceitos antes da prática!"*
+
+#### ✅ **30:00-55: API Simples + Postman**
 - [ ] **Código:** Mostrar `app_rest_simples.py` (estrutura)
 - [ ] **Executar:** `python app_rest_simples.py` (porta 5002)
 - [ ] **Postman 1:** GET / (verificar status)
@@ -41,9 +55,18 @@
 - [ ] **Postman 5:** GET /livros (agora com 1 livro)
 - [ ] **Demo:** PUT e DELETE rápidos
 
-**🎯 Objetivo:** *"Mostrar que API funciona em 15 minutos!"*
+**🎯 Objetivo:** *"Mostrar que API funciona em 25 minutos!"*
 
-#### ✅ **40:00-55: JWT na Prática**
+#### ✅ **55:00-20: 🎯 DINÂMICA - Desafio API Filmes**
+- [ ] **Explicar:** Cada aluno cria entidade FILMES (15min)
+- [ ] **Circular:** Ajudar com erros de sintaxe e lógica
+- [ ] **Verificar:** Se conseguem testar no Postman
+- [ ] **Apresentações:** 3-4 alunos mostram API funcionando
+- [ ] **Celebrar:** Conquistas e primeiros sucessos! 🎉
+
+**🎯 Objetivo:** *"Primeira API criada do zero!"*
+
+#### ✅ **20:00-40: JWT na Prática**
 - [ ] **jwt.io:** Decodificar token obtido no Postman
 - [ ] **Console:** Mostrar código JavaScript de decodificação
 - [ ] **Conceito:** Header.Payload.Signature
@@ -52,7 +75,15 @@
 
 **💡 Tip:** *"JWT é como um passaporte digital!"*
 
-#### ✅ **55:00-80: API com Banco**
+#### ✅ **40:00-55: 🎯 DINÂMICA - JWT Detective**
+- [ ] **Quiz:** Decodificar JWT projetado na tela (8min)
+- [ ] **Desafio:** Duplas competem no console do navegador (7min)
+- [ ] **Circular:** Verificar se conseguem extrair dados
+- [ ] **Apresentar:** Soluções das duplas
+
+**🎯 Objetivo:** *"Dominar JWT visceralmente!"*
+
+#### ✅ **55:00-15: API com Banco**
 - [ ] **Parar:** API simples (Ctrl+C)
 - [ ] **Executar:** `python app_rest_db.py` (porta 5003)
 - [ ] **Mostrar:** arquivo database.db criado
@@ -64,6 +95,15 @@
 - [ ] **Postman:** GET /stats (estatísticas admin)
 
 **🚀 Destaque:** *"Agora temos dados persistentes!"*
+
+#### ✅ **15:00-35: 🎯 DINÂMICA - Biblioteca Personalizada**
+- [ ] **Dividir:** Turma em duplas com desafios específicos
+- [ ] **Desafios:** Editora, recentes, favoritos, relatórios, fotos
+- [ ] **Circular:** Ajudar com queries SQL/SQLAlchemy
+- [ ] **Apresentações:** Cada dupla demonstra no Postman (5min)
+- [ ] **Quiz rápido:** Banco de dados (5min)
+
+**🎯 Objetivo:** *"Expandir conhecimento SQLAlchemy!"*
 
 ---
 
@@ -102,7 +142,7 @@
 - [ ] **Código:** `Dashboard.jsx` (useEffect, loadBooks)
 - [ ] **Mostrar:** Header com nome do usuário
 - [ ] **API call:** useEffect carregando livros automaticamente
-- [ ] **Código:** `BookCard.jsx` (componente reutilizável)
+- [ ]             **Código:** `BookCard.jsx` (componente reutilizável)
 - [ ] **Layout:** Grid responsivo com Tailwind
 - [ ] **Testar:** Responsividade (mobile view no DevTools)
 
@@ -113,7 +153,7 @@
 - [ ] **Testar:** Criar novo livro via formulário
 - [ ] **Testar:** Editar livro existente
 - [ ] **Testar:** Deletar com confirmação
-- [ ] **Cache:** Demonstrar conceito simples Map()
+- [ ] **LocalStorage:** Mostrar token salvo automaticamente no DevTools
 - [ ] **Network:** Mostrar requisições no DevTools
 
 **🔥 Final épico:** *"Sistema completo funcionando!"*
@@ -124,7 +164,7 @@
 
 ### ✅ **170:00-180: Recapitulação**
 - [ ] **Checklist:** ✅ API ✅ JWT ✅ Banco ✅ React ✅ Integração
-- [ ] **Próximos passos:** Deploy, testes, cache avançado
+- [ ] **Próximos passos:** Deploy, testes, authentication avançado
 - [ ] **Materiais:** README's, collection Postman, código GitHub
 - [ ] **Q&A:** Perguntas dos alunos
 

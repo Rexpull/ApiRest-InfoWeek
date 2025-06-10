@@ -48,10 +48,16 @@ api/
 - Status Codes importantes
 - JSON como formato de dados
 
+#### **🎯 DINÂMICA 1: Quiz REST + Exercício URLs** (15 min)
+**⏰ 00:15 - 00:30**
+- Quiz "REST ou não REST?" com placas (5min)
+- Exercício em grupos: criar URLs para Blog Posts (10min)
+- **Objetivo:** Fixar conceitos antes da prática
+
 ---
 
 ### 📌 **PARTE 2: API Simples** (25 min)
-**⏰ 00:15 - 00:40**
+**⏰ 00:30 - 00:55**
 
 #### Analisando o Código (10 min)
 ```python
@@ -108,10 +114,16 @@ GET http://localhost:5002/livros
 - Deletar um livro (DELETE)
 - Buscar livros
 
+#### **🎯 DINÂMICA 2: Desafio "Sua Primeira API"** (25 min)
+**⏰ 00:55 - 01:20**
+- Cada aluno cria entidade FILMES (15min)
+- Apresentações rápidas (10min)
+- **Objetivo:** Aplicar conhecimento na prática
+
 ---
 
-### 📌 **PARTE 3: Conceitos JWT** (15 min)
-**⏰ 00:40 - 00:55**
+### 📌 **PARTE 3: Conceitos JWT** (20 min)
+**⏰ 01:20 - 01:40**
 
 #### O que é JWT? (5 min)
 - Token de autenticação
@@ -145,10 +157,16 @@ POST http://localhost:5002/jwt/configure
 GET http://localhost:5002/jwt/info
 ```
 
+#### **🎯 DINÂMICA 3: JWT Detective + Token Master** (15 min)
+**⏰ 01:40 - 01:55**
+- Quiz interativo decodificando JWT (8min)
+- Desafio código em duplas (7min)
+- **Objetivo:** Dominar JWT na prática
+
 ---
 
-### 📌 **PARTE 4: API com Banco de Dados** (25 min)
-**⏰ 00:55 - 01:20**
+### 📌 **PARTE 4: API com Banco de Dados** (40 min)
+**⏰ 01:55 - 02:35**
 
 #### Inicializando o Banco (5 min)
 ```bash
@@ -217,10 +235,16 @@ GET http://localhost:5003/livros/buscar?q=casmurro
 GET http://localhost:5003/stats
 ```
 
+#### **🎯 DINÂMICA 4: Biblioteca Personalizada** (20 min)
+**⏰ 02:15 - 02:35**
+- Duplas implementam melhorias na API (15min)
+- Apresentações no Postman (5min)
+- **Objetivo:** Expandir conhecimento SQLAlchemy
+
 ---
 
-### 📌 **PARTE 5: CORS e OPTIONS** (10 min)
-**⏰ 01:20 - 01:30**
+### 📌 **PARTE 5: CORS e OPTIONS** (15 min)
+**⏰ 02:35 - 02:50**
 
 #### Problema do CORS (3 min)
 - Explicar Same-Origin Policy
@@ -238,7 +262,7 @@ CORS(app,
 )
 ```
 
-#### Testando OPTIONS (3 min)
+#### Testando OPTIONS (4 min)
 ```bash
 # Requisição preflight
 curl -X OPTIONS http://localhost:5003/livros \
@@ -249,315 +273,29 @@ curl -X OPTIONS http://localhost:5003/livros \
 # Mostrar headers de resposta
 ```
 
----
-
-## 🎨 BLOCO 2: Frontend + Integração (80 minutos)
-
-### 📌 **PARTE 6: Setup Frontend React** (15 min)
-**⏰ 01:30 - 01:45**
-
-#### Criando o Projeto React (8 min)
-```bash
-# Se já não existir
-npx create-react-app frontend-react
-cd frontend-react
-
-# Instalar dependências
-npm install axios tailwindcss
-
-# Configurar Tailwind
-npx tailwindcss init -p
-```
-
-#### Estrutura do Projeto (7 min)
-```
-frontend-react/
-├── src/
-│   ├── components/
-│   │   ├── Login.jsx          # Componente de login
-│   │   ├── Dashboard.jsx      # Dashboard principal
-│   │   ├── BookCard.jsx       # Card do livro
-│   │   └── BookForm.jsx       # Formulário de livro
-│   ├── services/
-│   │   └── api.js            # Configuração Axios
-│   ├── App.js                # Componente principal
-│   └── index.css             # Estilos Tailwind
-```
+#### **🎯 DINÂMICA 5: CORS na Prática** (5 min)
+**⏰ 02:45 - 02:50**
+- Experiência guiada de erro CORS
+- **Objetivo:** Entender CORS visceralmente
 
 ---
 
-### 📌 **PARTE 7: Configuração da API** (10 min)
-**⏰ 01:45 - 01:55**
+## 🎨 BLOCO 2: Frontend + Integração (10 minutos)
 
-#### Serviço de API (5 min)
-```javascript
-// Mostrar services/api.js
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:5003';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Interceptor para token automático
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-```
-
-#### Serviços Específicos (5 min)
-```javascript
-// authService
-export const authService = {
-  async login(email, password) {
-    const response = await api.post('/login', { email, password });
-    return response.data;
-  }
-};
-
-// booksService  
-export const booksService = {
-  async getBooks(page = 1, filters = {}) {
-    const params = { pagina: page, por_pagina: 12, ...filters };
-    const response = await api.get('/livros', { params });
-    return response.data;
-  }
-};
-```
-
----
-
-### 📌 **PARTE 8: Componente de Login** (15 min)
-**⏰ 01:55 - 02:10**
-
-#### Criando o Login (8 min)
-```jsx
-// Mostrar Login.jsx
-import React, { useState } from 'react';
-import { authService } from '../services/api';
-
-const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    
-    try {
-      const data = await authService.login(email, password);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.usuario));
-      onLogin(data.usuario);
-    } catch (error) {
-      alert('Erro ao fazer login');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
-        {/* ... inputs ... */}
-      </form>
-    </div>
-  );
-};
-```
-
-#### Testando o Login (7 min)
-- Executar `npm start`
-- Demonstrar login funcionando
-- Mostrar token no localStorage
-- Demonstrar erro de credenciais inválidas
-
----
-
-### 📌 **PARTE 9: Dashboard de Livros** (25 min)
-**⏰ 02:10 - 02:35**
-
-#### Componente Dashboard (10 min)
-```jsx
-// Mostrar Dashboard.jsx
-const Dashboard = ({ user, onLogout }) => {
-  const [livros, setLivros] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    loadBooks();
-  }, []);
-
-  const loadBooks = async () => {
-    try {
-      const data = await booksService.getBooks();
-      setLivros(data.livros);
-    } catch (error) {
-      console.error('Erro ao carregar livros:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">📚 Biblioteca</h1>
-          <div className="flex items-center space-x-4">
-            <span>Olá, {user.nome}</span>
-            <button onClick={onLogout}>Sair</button>
-          </div>
-        </div>
-      </header>
-      
-      <main className="container mx-auto px-4 py-8">
-        {/* Search bar */}
-        {/* Books grid */}
-      </main>
-    </div>
-  );
-};
-```
-
-#### Componente BookCard (8 min)
-```jsx
-// Mostrar BookCard.jsx
-const BookCard = ({ livro, onEdit, onDelete }) => {
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-      <h3 className="text-lg font-semibold mb-2">{livro.titulo}</h3>
-      <p className="text-gray-600 mb-1">📖 {livro.autor}</p>
-      <p className="text-gray-500 mb-1">📅 {livro.ano}</p>
-      <p className="text-gray-500 mb-1">🏷️ {livro.genero}</p>
-      
-      <div className="flex space-x-2 mt-4">
-        <button 
-          onClick={() => onEdit(livro)}
-          className="bg-blue-500 text-white px-3 py-1 rounded"
-        >
-          Editar
-        </button>
-        <button 
-          onClick={() => onDelete(livro.id)}
-          className="bg-red-500 text-white px-3 py-1 rounded"
-        >
-          Excluir
-        </button>
-      </div>
-    </div>
-  );
-};
-```
-
-#### Testando Interface (7 min)
-- Mostrar livros carregando da API
-- Demonstrar responsividade (mobile/desktop)
-- Testar busca
-- Mostrar loading states
-
----
-
-### 📌 **PARTE 10: CRUD Frontend** (15 min)
-**⏰ 02:35 - 02:50**
-
-#### Formulário de Livro (8 min)
-```jsx
-// Mostrar BookForm.jsx
-const BookForm = ({ livro, onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
-    titulo: livro?.titulo || '',
-    autor: livro?.autor || '',
-    ano: livro?.ano || '',
-    genero: livro?.genero || '',
-    descricao: livro?.descricao || ''
-  });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (livro) {
-        await booksService.updateBook(livro.id, formData);
-      } else {
-        await booksService.createBook(formData);
-      }
-      onSave();
-    } catch (error) {
-      alert('Erro ao salvar livro');
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4">
-          {livro ? 'Editar Livro' : 'Novo Livro'}
-        </h2>
-        <form onSubmit={handleSubmit}>
-          {/* ... inputs ... */}
-        </form>
-      </div>
-    </div>
-  );
-};
-```
-
-#### Integrando CRUD (4 min)
-- Criar livro via formulário
-- Editar livro existente
-- Deletar com confirmação
-- Recarregar lista automaticamente
-
-#### Cache e Performance (3 min)
-```javascript
-// Demonstrar cache simples
-const cache = new Map();
-
-const getCachedBooks = async () => {
-  const cached = cache.get('books');
-  if (cached && Date.now() - cached.timestamp < 5 * 60 * 1000) {
-    return cached.data;
-  }
-  
-  const data = await booksService.getBooks();
-  cache.set('books', { data, timestamp: Date.now() });
-  return data;
-};
-```
-
----
-
-## 🎯 **WRAP-UP FINAL** (10 min)
+### 📌 **PARTE 6: Setup Frontend React** (10 min)
 **⏰ 02:50 - 03:00**
 
-### Recapitulação (5 min)
-1. ✅ **API REST** - 3 versões diferentes
-2. ✅ **Autenticação JWT** - Token seguro
-3. ✅ **Banco de Dados** - SQLAlchemy + SQLite
-4. ✅ **Frontend React** - Interface moderna
-5. ✅ **Integração** - API + Frontend funcionando
+#### **🎯 RESUMO FINAL** (5 min)
+- Mostrar sistema funcionando completo
+- Recapitular conceitos principais
+- Próximos passos de estudo
 
-### Próximos Passos (3 min)
-- Deploy em produção
-- Testes automatizados
-- Documentação com Swagger
-- Cache avançado
-- WebSockets para real-time
-
-### Q&A (2 min)
-- Dúvidas dos alunos
-- Sugestões de melhorias
+#### **🎯 DINÂMICA 6: Quiz Final "Mestre das APIs"** (5 min)
+- 4 rounds rápidos com toda turma
+- Entrega de certificados simbólicos
+- **Objetivo:** Consolidar aprendizado
+- Mostrar token no localStorage
+- Demonstrar erro de credenciais inválidas
 
 ---
 
@@ -582,23 +320,22 @@ const getCachedBooks = async () => {
 
 ---
 
-## ⏱️ **CRONOGRAMA RESUMIDO**
+## ⏱️ **CRONOGRAMA RESUMIDO COM DINÂMICAS**
 
-| Tempo | Tópico | Duração |
-|-------|--------|---------|
-| 00:00-00:15 | Introdução + Setup | 15min |
-| 00:15-00:40 | API Simples + Postman | 25min |
-| 00:40-00:55 | JWT Conceitos | 15min |
-| 00:55-01:20 | API com Banco | 25min |
-| 01:20-01:30 | CORS + OPTIONS | 10min |
-| 01:30-01:45 | Setup React | 15min |
-| 01:45-01:55 | Config API | 10min |
-| 01:55-02:10 | Login Component | 15min |
-| 02:10-02:35 | Dashboard + Cards | 25min |
-| 02:35-02:50 | CRUD Frontend | 15min |
-| 02:50-03:00 | Wrap-up + Q&A | 10min |
+| Tempo | Tópico | Dinâmica | Duração |
+|-------|--------|----------|---------|
+| 00:00-00:15 | Introdução + Setup | - | 15min |
+| 00:15-00:30 | **🎯 Quiz REST + URLs** | Placas + Grupos | 15min |
+| 00:30-00:55 | API Simples + Postman | - | 25min |
+| 00:55-01:20 | **🎯 Desafio API Filmes** | Individual | 25min |
+| 01:20-01:40 | JWT Conceitos | - | 20min |
+| 01:40-01:55 | **🎯 JWT Detective** | Interativo | 15min |
+| 01:55-02:15 | API com Banco | - | 20min |
+| 02:15-02:35 | **🎯 Biblioteca Personalizada** | Duplas | 20min |
+| 02:35-02:50 | CORS + **🎯 Demo CORS** | Experiência | 15min |
+| 02:50-03:00 | **🎯 Quiz Final + Wrap-up** | Competitivo | 10min |
 
-**TOTAL: 3h00min (com 10min de buffer)**
+**TOTAL: 3h00min | DINÂMICAS: 110min (61% do curso)**
 
 ---
 
