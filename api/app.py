@@ -46,7 +46,9 @@ def adicionar_livro():
     livro = {
         'id': len(livros_memoria) + 1,
         'titulo': dados['titulo'],
-        'autor': dados['autor']
+        'autor': dados['autor'],
+        'ano': dados['ano'],
+        'genero': dados['genero']
     }
     livros_memoria.append(livro)
     return jsonify(livro), 201
@@ -59,6 +61,9 @@ def atualizar_livro(id):
         if livro['id'] == id:
             livro['titulo'] = dados.get('titulo', livro['titulo'])
             livro['autor'] = dados.get('autor', livro['autor'])
+            livro['ano'] = dados.get('ano', livro['ano'])
+            livro['genero'] = dados.get('genero', livro['genero'])
+
             return jsonify(livro), 200
     return jsonify({'erro': 'Livro não encontrado'}), 404
 

@@ -1,0 +1,7 @@
+Nome,Método,URL,Body (JSON),Headers,Token Necessário
+Login,POST,http://localhost:5001/login,"{'email': 'admin@user.com', 'password': 'admin'}","{'Content-Type': 'application/json', 'Accept': 'application/json'}",❌
+Listar livros,GET,http://localhost:5001/livros,,{'Accept': 'application/json'},❌
+Criar livro,POST,http://localhost:5001/livros,"{'titulo': 'Dom Casmurro', 'autor': 'Machado de Assis'}","{'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer <seu_token_jwt>'}",✅
+Obter livro por ID,GET,http://localhost:5001/livros/1,,"{'Accept': 'application/json', 'Authorization': 'Bearer <seu_token_jwt>'}",✅
+Atualizar livro por ID,PUT,http://localhost:5001/livros/1,"{'titulo': 'Dom Casmurro (Edição atualizada)', 'autor': 'Machado de Assis'}","{'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer <seu_token_jwt>'}",✅
+Deletar livro por ID,DELETE,http://localhost:5001/livros/1,,"{'Accept': 'application/json', 'Authorization': 'Bearer <seu_token_jwt>'}",✅

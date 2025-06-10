@@ -61,7 +61,7 @@ def validate_accept_header():
         return None
 
     # Aceita application/json
-    if 'application/json' in accept_header:
+    if 'application/json' in accept_header or 'application/xml' in accept_header:
         return None
 
     allowed_accept_types = {
@@ -78,14 +78,15 @@ def validate_accept_header():
     return jsonify({
         'title': 'Not Acceptable',
         'status': 406,
-        'detail': f'Not Acceptable format requested: {accept_header}, only application/json and text/csv are supported'
+        'detail': f'Not Acceptable format requested: {accept_header}, only application/json and application/xml are supported'
     }), 406
 
 def token_required(f):
     """Decorator para proteger rotas que requerem autenticação"""
     @wraps(f)
     def decorated(*args, **kwargs):
-        protected_routes = ['/admin', '/orders']
+        # Exemplos (Mais pra frente colocar o /livros)
+        protected_routes = ['/admin', '/orders'] 
         if not any(request.path.startswith(route) for route in protected_routes):
             return f(*args, **kwargs)
 
@@ -201,7 +202,7 @@ def home():
             'mensagem': 'API REST com HATEOAS',
             '_links': {
                 'livros': {'href': '/livros'},
-                'documentacao': {'href': '/docs'}
+                'login': {'href': '/login'}
             }
         }), 200
     else:
@@ -260,7 +261,7 @@ def listar_livros():
         return jsonify(livros_com_links), 200
     else:
         return make_response(
-            '<livros>' + ''.join(f'<livro><id>{l["id"]}</id><titulo>{l["titulo"]}</titulo></livro>' for l in livros) + '</livros>',
+            '<livros>' + ''.join(f'<livro><id>{l["id"]}</id><titulo>{l["titulo"]}</titulo><autor>{l["autor"]}</autor></livro>' for l in livros) + '</livros>',
             200,
             {'Content-Type': 'application/xml'}
         )
